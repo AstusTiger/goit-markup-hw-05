@@ -21,7 +21,7 @@
             <a href="#" class="logo"><span class="web">Web</span><span class="studio-black">Studio</span></a>
             <nav>
                 <ul class="header-list">
-                    <li class="list-item"><a class="menu-navigation" href="#">Студия</a></li>
+                    <li class="list-item"><a class="menu-navigation studio-line" href="#">Студия</a></li>
                     <li class="list-item"><a class="menu-navigation" href="portfolio.html">Портфолио</a></li>
                     <li class="list-item"><a class="menu-navigation" href="#">Контакты</a></li>
                 </ul>
@@ -46,12 +46,20 @@
     <!--Main-->
     <main>
         <!--Section 1-->
-        <section class="hero section overlay">
+        <section class="hero section">
             <div class="container">
                 <h1 class="hero-slogan">ЭФФЕКТИВНЫЕ РЕШЕНИЯ <br>
                     ДЛЯ ВАШЕГО БИЗНЕСА</h1>
-                <button type="button" class="button-studio">Заказать услугу</button>
-            </div>
+                <button type="button" class="button-studio" data-modal-open>Заказать услугу</button>
+                <div class="backdrop is-hidden" data-modal>
+                    <div class="modal">
+                        <button class="modal-close-btn" data-modal-close>
+                            <svg class="icon-close-btn">
+                                <use href="./icons/icons.svg#icon-btn-close"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div> 
         </section>
         <!--Section 2-->
         <!--Преимущества-->
@@ -110,11 +118,26 @@
                 <h2 class="activity">Чем мы занимаемся</h2>
                 <ul class="container-activity">
                     <!-- Фото процесса 1 -->
-                    <li><img src="images/box1.jpg" alt="руки на клавиатуре" width="370" /></li>
+                    <li class="activity-cards">
+                        <img src="images/box1.jpg" alt="руки на клавиатуре" width="370" />
+                        <div class="label-wrapper">
+                            <p class="label">Десктопные приложения</p>
+                        </div>
+                    </li>
                     <!-- Фото процесса 2 -->
-                    <li><img src="images/box2.jpg" alt="в руках телефон" width="370" /></li>
+                    <li class="activity-cards">
+                        <img src="images/box2.jpg" alt="в руках телефон" width="370" />
+                        <div class="label-wrapper">
+                            <p class="label">Мобильные приложения</p>
+                        </div>
+                    </li>
                     <!-- Фото процесса 3 -->
-                    <li><img src="images/box3.jpg" alt="в руках листок" width="370" /></li>
+                    <li class="activity-cards">
+                        <img src="images/box3.jpg" alt="в руках листок" width="370" />
+                        <div class="label-wrapper">
+                            <p class="label">Дизайнерские решения</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -380,6 +403,9 @@
             </div>
         </div>
     </footer>
+
+    <script src="./js/modal.js"></script>
+
 </body>
 
 </html>

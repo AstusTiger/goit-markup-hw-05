@@ -26,6 +26,19 @@ p {
     padding: 0;
 }
 
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+a:visited {
+    color: currentColor;
+  }
+
+img {
+    display: inline-block;
+}
+
 /* base settings */
 
 :root {
@@ -38,6 +51,8 @@ p {
     --ultra-black-text: #000000;
     --line-color: #ECECEC;
 	--logo-primery-color: #AFB1B8; 
+    --cubic-value: 0.4, 0, 0.2, 1;
+	--animation-time: 250ms;
 }
 
 .container {
@@ -118,14 +133,7 @@ header nav {
     display: block;
     padding-top: 32px;
     padding-bottom: 32px;
-}
-
-.menu-navigation:link {
-    color: var(--black-text);
-}
-
-.menu-navigation:visited {
-    color: var(--black-text);
+    transition: color var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .menu-navigation:hover {
@@ -137,9 +145,21 @@ header nav {
     color: var(--active-text);
 }
 
-.menu-navigation:active {
-    color: var(--active-text);
+.studio-line {
+    position: relative;
 }
+
+.studio-line::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0; 
+    display: block;
+    width: 100%; 
+    height: 4px; 
+    border-radius: 2px;
+    background-color: var(--active-text);
+} 
 
 .contacts-menu {
     display: flex;
@@ -154,6 +174,7 @@ header nav {
     letter-spacing: 0.02em;
     padding-top: 32px;
     padding-bottom: 32px;
+    transition: color var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .icon-envelope {
@@ -162,6 +183,7 @@ header nav {
 	color: var(--main-text);
  	margin-right: 10px; 
     fill: currentColor;
+    transition: fill var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .icon-smartphone { 
@@ -170,6 +192,7 @@ header nav {
 	color: var(--main-text);
 	margin-right: 10px;
     fill: currentColor;
+    transition: fill var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .contacts:hover .icon-envelope,
@@ -255,25 +278,81 @@ header nav {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: background-color var(--animation-time) cubic-bezier(var(--cubic-value)); 
 }
 
 .button-studio:hover {
     background-color: var(--active-text);
-    color: var(--white-text);
 }
 
 .button-studio:focus {
     outline: none;
     background-color: var(--active-text);
-    color: var(--white-text);
 }
+
+.backdrop {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	z-index: 1;
+
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.1);
+    transition: opacity var(--animation-time) cubic-bezier(var(--cubic-value)), visibility var(--animation-time) cubic-bezier(var(--cubic-value));
+} 
+
+.is-hidden {
+	opacity: 0;
+	pointer-events: none;
+	visibility: hidden;
+	
+}
+
+.modal {
+	height: 581px;
+	width: 528px;
+	background-color: var(--white-text);
+	border-radius: 4px;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, .12), 0px 1px 1px rgba(0, 0, 0, .14), 0px 2px 1px rgba(0, 0, 0, .2);
+
+	opacity: 1;
+	transform:  scale(1);
+	transition: opacity var(--animation-time) cubic-bezier(var(--cubic-value)), transform var(--animation-time) cubic-bezier(var(--cubic-value));
+} 
+
+.is-hidden .modal{
+	transform: scale(.2); 
+	opacity: 0;
+}
+
+.icon-close-btn {
+	width: 11px;
+	height: 11px;
+} 
+
+.modal-close-btn {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	right: 8px;
+	top: 8px;
+
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	border: 1px solid #0000001A;
+
+	background-color: var(--secondary-bg-color);
+} 
 
 /*PLUSES*/
-
-.button-studio:active {
-    color: var(--black-text);
-    background-color: var(--light-background);
-}
 
 .container-pluses {
     display: flex;
@@ -339,6 +418,27 @@ header nav {
     letter-spacing: 0.03em;
 }
 
+.activity-cards {
+	position: relative;
+}
+
+.label-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	position: absolute;
+	width: 100%;
+	height: 70px;
+	background-color: rgba(47, 48, 58, 0.8);
+	bottom: 0;
+}
+
+.label {
+	font-weight: 700;
+	text-transform: uppercase;
+	color: var(--white-text);
+}
+
 /*TEAM*/
 
 .container-team {
@@ -398,16 +498,15 @@ header nav {
     gap: 10px;
 }
 
-.icon-instagram,
-.icon-twitter,
-.icon-facebook,
-.icon-linkedin { 
+.pictures { 
     fill: var(--logo-primery-color);
+    transition: fill var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .members-socialnetworks-element:hover .pictures,
 .members-socialnetworks-element:focus .pictures {
     fill: var(--white-text);
+    
 }
 
 .members-socialnetworks-element {
@@ -418,6 +517,7 @@ header nav {
 	height: 44px;
 	border-radius: 50%;
 	background-color: var(--white-text);
+    transition: background-color var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .members-socialnetworks-element:hover ,
@@ -460,25 +560,43 @@ header nav {
     border-radius: 4px;
     width: 170px;
     height: 92px;
+    transition: border-color var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .logo-company {
     fill: var(--logo-primery-color);
+    transition: fill var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .clients-container-element:hover,
 .clients-container-element:focus {
     outline: none;
     border-color: var(--active-text);
+    
 }
 .clients-container-element:hover .logo-company,
-.clients-container-element:focus .logo-company
-{
+.clients-container-element:focus .logo-company {
     fill: var(--active-text);
 }
 
 
 /* PORTFOLIO */
+
+.portfolio-line {
+    position: relative;
+}
+
+.portfolio-line::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0; 
+    display: block;
+    width: 100%; 
+    height: 4px; 
+    border-radius: 2px;
+    background-color: var(--active-text);
+} 
 
 .visually-hidden {
     position: absolute;
@@ -517,6 +635,7 @@ header nav {
     letter-spacing: 0.03em;
     border: transparent;
     padding: 6px 22px;
+    transition: color var(--animation-time) cubic-bezier(var(--cubic-value)), background-color var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .buttons:hover {
@@ -552,6 +671,39 @@ header nav {
 .card-info {
     padding: 20px 24px;
 }
+
+.img-wrapper {
+	position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+	position: absolute;
+	background-color: rgba(33, 150, 243, 0.9);
+	width: 100%;
+	height: 100%;
+    top: 0;
+    left: 0; 
+
+	transform: translateY(100%);
+	transition: transform var(--animation-time) cubic-bezier(var(--cubic-value));
+}
+
+.portfolio-card:hover .overlay {
+    transform: translateY(0);
+}
+
+.portfolio-card {
+	transition: box-shadow var(--animation-time) cubic-bezier(var(--cubic-value));
+}
+
+.overlay-text {
+	color: var(--white-text);
+	font-size: 18px;
+	line-height: 1.55;
+	letter-spacing: 0.03em;
+    padding: 63px 24px;
+}  
 
 /* projects */
 .projects {
@@ -606,20 +758,12 @@ footer {
     color: rgba(255, 255, 255, 0.6);
 }
 
-.footer:link {
-    color: var(--main-text);
-}
-
 .footer:hover {
     color: var(--active-text);
 }
 
 .footer:focus {
     outline: none;
-}
-
-.footer:active {
-    color: var(--active-text);
 }
 
 .ours-socialnetworks {
@@ -634,7 +778,6 @@ footer {
 	padding-bottom: 20px;
 	font-weight: 700;
 	letter-spacing: 0.03em;
-
 }
 
 .ours-socialnetworks-container {
@@ -654,6 +797,7 @@ footer {
 	height: 44px;
 	border-radius: 50%;
 	background-color: rgba(255, 255, 255, 0.1);
+    transition:  background-color var(--animation-time) cubic-bezier(var(--cubic-value));
 }
 
 .ours-socialnetworks-element:hover,
